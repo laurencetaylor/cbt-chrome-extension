@@ -1,6 +1,5 @@
 body {
     font-family: 'Shippori Mincho B1', Georgia, serif;
-    background-color: ;
 }
 
 .distortion-name {
@@ -10,4 +9,24 @@ body {
 
 .distortion-description {
     font-size: large;
+}
+
+.distortion-library {
+    padding: 10%;
+    width: 50%;
+}
+
+.distortion-details {
+    padding: 10%;
+    width: 50%;
+}
+
+.wrapper {
+    display: flex;
+}
+
+.distortion-list {
+    list-style-type: none;
+    font-size: large;
+    font-weight: 800;
 }

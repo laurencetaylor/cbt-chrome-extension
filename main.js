@@ -90,3 +90,19 @@ const distortionDescriptionElement = document.querySelector(
     '.distortion-description'
 );
 distortionDescriptionElement.innerHTML = randomDistortion.description;
+
+(() => {
+    const distortionUlElement = document.querySelector('.distortion-list');
+
+    Object.keys(distortionDetails).forEach((distortion) => {
+        const liElement = document.createElement('li');
+        const distortionName = distortionDetails[distortion].name;
+
+        if (distortionName === randomDistortion.name) {
+            liElement.style.color = '#0077b3';
+        }
+
+        liElement.innerHTML = distortionName;
+        distortionUlElement.appendChild(liElement);
+    });
+})();
