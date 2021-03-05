@@ -72,37 +72,47 @@ const distortionDetails = {
     },
 };
 
-const getRandomDistortion = () => {
-    const distortions = Object.keys(distortionDetails);
-    const randomDistortion =
-        distortions[Math.floor(Math.random() * distortions.length)];
+const getRandomDistortionKey = () => {
+    const distortionKeys = Object.keys(distortionDetails);
+    const randomDistortionKey =
+        distortionKeys[Math.floor(Math.random() * distortionKeys.length)];
 
-    return distortionDetails[randomDistortion];
+    return randomDistortionKey;
 };
 
-const randomDistortion = getRandomDistortion();
-
 // Controller
-const distortionNameElement = document.querySelector('.distortion-name');
-distortionNameElement.innerHTML = randomDistortion.name;
-
-const distortionDescriptionElement = document.querySelector(
-    '.distortion-description'
-);
-distortionDescriptionElement.innerHTML = randomDistortion.description;
-
-(() => {
+const fillDistortionList = () => {
     const distortionUlElement = document.querySelector('.distortion-list');
 
-    Object.keys(distortionDetails).forEach((distortion) => {
+    Object.keys(distortionDetails).forEach((distortionKey) => {
         const liElement = document.createElement('li');
-        const distortionName = distortionDetails[distortion].name;
+        liElement.setAttribute('class', distortionKey);
 
-        if (distortionName === randomDistortion.name) {
-            liElement.style.color = '#0077b3';
-        }
-
+        const distortionName = distortionDetails[distortionKey].name;
         liElement.innerHTML = distortionName;
         distortionUlElement.appendChild(liElement);
     });
-})();
+};
+
+const fillDistortionDetails = (distortionKey) => {
+    const distortion = distortionDetails[distortionKey];
+    const distortionNameElement = document.querySelector('.distortion-name');
+    distortionNameElement.innerHTML = distortion.name;
+    const distortionDescriptionElement = document.querySelector(
+        '.distortion-description'
+    );
+    distortionDescriptionElement.innerHTML = distortion.description;
+};
+
+const highlightSelectedDistortion = (distortionKey) => {
+    const selectedDistortion = document.querySelector(`.${distortionKey}`);
+    selectedDistortion.style.color = '#66ccff';
+};
+
+window.onload = () => {
+    fillDistortionList();
+
+    const randomDistortionKey = getRandomDistortionKey();
+    fillDistortionDetails(randomDistortionKey);
+    highlightSelectedDistortion(randomDistortionKey);
+};
