@@ -19,7 +19,7 @@ const distortionDetails = {
         example: '',
     },
     DISQUALIFY_THE_POSITIVE: {
-        name: 'Disqualify the positive',
+        name: 'Disqualify The Positive',
         description:
             'Disqualifying neutral or positive experiences, so they are transformed into negative ones',
         example: '',
@@ -81,18 +81,7 @@ const getRandomDistortionKey = () => {
 };
 
 // Controller
-const fillDistortionList = () => {
-    const distortionUlElement = document.querySelector('.distortion-list');
-
-    Object.keys(distortionDetails).forEach((distortionKey) => {
-        const liElement = document.createElement('li');
-        liElement.setAttribute('class', distortionKey);
-
-        const distortionName = distortionDetails[distortionKey].name;
-        liElement.innerHTML = distortionName;
-        distortionUlElement.appendChild(liElement);
-    });
-};
+let currentDistortionKey = '';
 
 const fillDistortionDetails = (distortionKey) => {
     const distortion = distortionDetails[distortionKey];
@@ -109,10 +98,34 @@ const highlightSelectedDistortion = (distortionKey) => {
     selectedDistortion.style.color = '#66ccff';
 };
 
+const fillDistortionList = () => {
+    const distortionUlElement = document.querySelector('.distortion-list');
+
+    Object.keys(distortionDetails).forEach((distortionKey) => {
+        const liElement = document.createElement('li');
+        liElement.setAttribute('class', distortionKey);
+
+        const distortionName = distortionDetails[distortionKey].name;
+
+        liElement.innerHTML = distortionName;
+
+        liElement.addEventListener('click', (event) => {
+            const lastKey = document.querySelector(`.${currentDistortionKey}`);
+            lastKey.style.color = 'black';
+
+            currentDistortionKey = event.target.className;
+            fillDistortionDetails(currentDistortionKey);
+            highlightSelectedDistortion(currentDistortionKey);
+        });
+
+        distortionUlElement.appendChild(liElement);
+    });
+};
+
 window.onload = () => {
     fillDistortionList();
 
-    const randomDistortionKey = getRandomDistortionKey();
-    fillDistortionDetails(randomDistortionKey);
-    highlightSelectedDistortion(randomDistortionKey);
+    currentDistortionKey = getRandomDistortionKey();
+    fillDistortionDetails(currentDistortionKey);
+    highlightSelectedDistortion(currentDistortionKey);
 };
