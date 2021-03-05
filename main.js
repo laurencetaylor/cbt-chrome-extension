@@ -3,14 +3,14 @@ const distortionDetails = {
         name: 'All Or Nothing Thinking',
         description:
             'Evaluating things in extreme, black or white categories; dichotomous thinking',
-        example:
-            '',
+        example: '',
     },
     OVERGENERALIZATION: {
         name: 'Overgeneralization',
         description:
             'If something happens once, or coincidentally multiple times, it will happen forever',
-        example: 'You are rejected in a job interview; you conclude you will never find work again',
+        example:
+            'You are rejected in a job interview; you conclude you will never find work again',
     },
     MENTAL_FILTER: {
         name: 'Mental Filter',
@@ -85,3 +85,8 @@ const randomDistortion = getRandomDistortion();
 // Controller
 const distortionNameElement = document.querySelector('.distortion-name');
 distortionNameElement.innerHTML = randomDistortion.name;
+
+const distortionDescriptionElement = document.querySelector(
+    '.distortion-description'
+);
+distortionDescriptionElement.innerHTML = randomDistortion.description;
