@@ -132,7 +132,7 @@ const fillDistortionList = () => {
 const setLeafSvg = () => {
     const svgPlaceholder = document.querySelector('.leaf-image');
     const randomNumber = Math.floor(Math.random() * 5);
-    svgPlaceholder.setAttribute('src', `plant-${randomNumber}.svg`);
+    svgPlaceholder.setAttribute('data', `plant-${randomNumber}.svg`);
 };
 
 window.onload = () => {

@@ -16,7 +16,13 @@ footer {
 }
 
 .leaf-image {
-    color: black;
+    fill: black;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 20px;
+    filter: grayscale(100%) saturate(2878%) hue-rotate(346deg) brightness(104%)
+        contrast(100%);
 }
 
 .footer-links {
@@ -54,6 +60,7 @@ footer {
 
 .wrapper {
     display: flex;
+    height: 50%;
 }
 
 .distortion-list {
