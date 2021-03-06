@@ -1,5 +1,27 @@
 body {
     font-family: 'Shippori Mincho B1', Georgia, serif;
+    animation: fadeIn ease 1s;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: right;
+}
+
+.header {
+    margin: 20px;
+}
+
+.leaf-image {
+    color: black;
+}
+
+.footer-links {
+    list-style-type: none;
+    margin: 20px;
 }
 
 .distortion-name {
@@ -19,6 +41,15 @@ body {
 .distortion-details {
     padding: 10%;
     width: 50%;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .wrapper {

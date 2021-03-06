@@ -81,22 +81,29 @@ const getRandomDistortionKey = () => {
 };
 
 // Controller
-let currentDistortionKey = '';
-
 const fillDistortionDetails = (distortionKey) => {
-    const distortion = distortionDetails[distortionKey];
+    const { name, description } = distortionDetails[distortionKey];
+
     const distortionNameElement = document.querySelector('.distortion-name');
-    distortionNameElement.innerHTML = distortion.name;
     const distortionDescriptionElement = document.querySelector(
         '.distortion-description'
     );
-    distortionDescriptionElement.innerHTML = distortion.description;
+
+    distortionNameElement.innerHTML = name;
+    distortionDescriptionElement.innerHTML = description;
 };
 
-const highlightSelectedDistortion = (distortionKey) => {
+const highlightDistortion = (distortionKey) => {
     const selectedDistortion = document.querySelector(`.${distortionKey}`);
     selectedDistortion.style.color = '#66ccff';
 };
+
+const unhighlightDistortion = (distortionKey) => {
+    const distortion = document.querySelector(`.${distortionKey}`);
+    distortion.style.color = 'black';
+};
+
+let currentDistortionKey;
 
 const fillDistortionList = () => {
     const distortionUlElement = document.querySelector('.distortion-list');
@@ -110,22 +117,30 @@ const fillDistortionList = () => {
         liElement.innerHTML = distortionName;
 
         liElement.addEventListener('click', (event) => {
-            const lastKey = document.querySelector(`.${currentDistortionKey}`);
-            lastKey.style.color = 'black';
+            unhighlightDistortion(currentDistortionKey);
 
             currentDistortionKey = event.target.className;
+
             fillDistortionDetails(currentDistortionKey);
-            highlightSelectedDistortion(currentDistortionKey);
+            highlightDistortion(currentDistortionKey);
         });
 
         distortionUlElement.appendChild(liElement);
     });
 };
 
+const setLeafSvg = () => {
+    const svgPlaceholder = document.querySelector('.leaf-image');
+    const randomNumber = Math.floor(Math.random() * 5);
+    svgPlaceholder.setAttribute('src', `plant-${randomNumber}.svg`);
+};
+
 window.onload = () => {
     fillDistortionList();
 
     currentDistortionKey = getRandomDistortionKey();
+
     fillDistortionDetails(currentDistortionKey);
-    highlightSelectedDistortion(currentDistortionKey);
+    highlightDistortion(currentDistortionKey);
+    setLeafSvg();
 };

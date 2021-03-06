@@ -4,9 +4,6 @@
   "version": "1.0",
   "author": "Laurence Taylor",
   "manifest_version": 2,
-  "background": {
-    "scripts": ["./background.js"]
-  },
   "chrome_url_overrides": {
     "newtab": "newtab.html"
   },
