@@ -95,7 +95,7 @@ const fillDistortionDetails = (distortionKey) => {
 
 const highlightDistortion = (distortionKey) => {
     const selectedDistortion = document.querySelector(`.${distortionKey}`);
-    selectedDistortion.style.color = '#66ccff';
+    selectedDistortion.style.color = '#cb9d06';
 };
 
 const unhighlightDistortion = (distortionKey) => {

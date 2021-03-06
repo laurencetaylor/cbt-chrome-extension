@@ -1,5 +1,5 @@
 body {
-    font-family: 'Shippori Mincho B1', Georgia, serif;
+    font-family: 'Cardo', Georgia, serif;
     animation: fadeIn ease 1s;
 }
 
@@ -12,7 +12,7 @@ footer {
 }
 
 .header {
-    margin: 20px;
+    margin: 2%;
 }
 
 .leaf-image {
@@ -20,23 +20,23 @@ footer {
     position: fixed;
     left: 0;
     bottom: 0;
-    padding: 20px;
-    filter: grayscale(100%) saturate(2878%) hue-rotate(346deg) brightness(104%)
-        contrast(100%);
+    margin: 2%;
+    z-index: -1;
 }
 
 .footer-links {
     list-style-type: none;
-    margin: 20px;
+    margin: 2%;
 }
 
 .distortion-name {
-    font-weight: 800;
+    font-weight: 700;
     font-size: xx-large;
 }
 
 .distortion-description {
     font-size: large;
+    background-color: white;
 }
 
 .distortion-library {
@@ -66,7 +66,7 @@ footer {
 .distortion-list {
     list-style-type: none;
     font-size: large;
-    font-weight: 800;
+    font-weight: 700;
 }
 
 li {
