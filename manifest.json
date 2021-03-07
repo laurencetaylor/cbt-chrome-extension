@@ -1,11 +1,12 @@
 {
-  "name": "Mental Distortions",
-  "description": "Makes your new tab page a CBT mental distortion",
-  "version": "1.0",
-  "author": "Laurence Taylor",
-  "manifest_version": 2,
-  "chrome_url_overrides": {
-    "newtab": "newtab.html"
-  },
-  "permissions": ["activeTab"]
+    "name": "UnDistort: CBT Mental Distortions",
+    "description": "Makes your new tab page highlight a cognitive behavioral therapy (CBT) mental distortion with explanation",
+    "version": "1.0",
+    "author": "Laurence Taylor",
+    "manifest_version": 2,
+    "chrome_url_overrides": {
+        "newtab": "newtab.html"
+    },
+    "permissions": ["activeTab"],
+    "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" }
 }

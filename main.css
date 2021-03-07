@@ -32,6 +32,7 @@ footer {
 .distortion-name {
     font-weight: 700;
     font-size: xx-large;
+    background-color: white;
 }
 
 .distortion-description {
@@ -39,13 +40,17 @@ footer {
     background-color: white;
 }
 
+.distortion-example {
+    font-size: large;
+    font-style: italic;
+    background-color: white;
+}
+
 .distortion-library {
-    padding: 10%;
     width: 50%;
 }
 
 .distortion-details {
-    padding: 10%;
     width: 50%;
 }
 
@@ -71,4 +76,32 @@ footer {
 
 li {
     cursor: pointer;
+}
+
+a {
+    color: #cb9d06;
+}
+
+a:active {
+    color: #cb9d06;
+}
+
+@media only screen and (min-width: 801px) {
+    .distortion-library {
+        padding: 10%;
+    }
+
+    .distortion-details {
+        padding: 10%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .distortion-library {
+        padding: 2%;
+    }
+
+    .distortion-details {
+        padding: 2%;
+    }
 }
