@@ -35,29 +35,29 @@ const distortionDetails = {
     FORTUNE_TELLING: {
         name: 'Fortune Telling',
         description: 'Imagining arbitrarily that something bad is about to happen. Making negative predictions with no evidence behind them.',
-        example: '',
+        example: 'Try to catch yourself when you baselessly imagine bad things happening to you.',
     },
     MAGNIFICATION: {
         name: 'Magnification',
         description:
-            'Exaggerating your errors, fears, and imperfections; catastrophising',
-        example: '',
+            'Exaggerating your errors, fears, and imperfections; catastrophizing and blowing things out of proportion.',
+        example: 'Making a mistake does not mean your life will spiral out of control. Have empathy for yourself.',
     },
     MINIMIZATION: {
         name: 'Minimization',
         description:
-            'Glossing over your desirable qualities as well as the flaws of others',
-        example: '',
+            'Minimizing your desirable qualities and strengths, as well as the flaws of others.',
+        example: 'Be proud of your many good qualities. Accept that nobody is perfect.',
     },
     EMOTIONAL_REASONING: {
         name: 'Emotional Reasoning',
-        description: 'Taking emotions as evidence for the truth',
-        example: '',
+        description: 'Taking emotions as evidence for the truth. You feel like a failure, so you must be a failure.',
+        example: "Remember that negative emotions are not always rooted in reality., they are often the result of distorted perceptions.",
     },
     SHOULD_STATEMENTS: {
         name: 'Should Statements',
         description:
-            "Making yourself feel terrible by saying 'I should' do this or that",
+            "Making yourself feel terrible by saying 'I should' or 'I must' do this or that.",
         example: '',
     },
     MISLABELLING: {
