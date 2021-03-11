@@ -2,37 +2,39 @@ const distortionDetails = {
     ALL_OR_NOTHING: {
         name: 'All Or Nothing Thinking',
         description:
-            "Evaluating things in extreme, black or white categories. Dichotomous thinking. You might find yourself using words like 'always', 'every', and 'never'.",
-        example: "You don't do as well as you expect in a test. You view yourself as a complete failure.",
+            "You evaluate things in extreme, black or white categories. You might find yourself using words like 'always', 'every', and 'never'. This is the basis for perfectionism.",
+        example:
+            'Life is rarely entirely one way or the other, but shades of gray. By forcing your experiences into absolute categories you are less likely to be satisfied.',
     },
     OVERGENERALIZATION: {
         name: 'Overgeneralization',
         description:
-            'If something happens once, or coincidentally multiple times, it will happen forever',
+            'When something occurs once, for example rejection, you conclude it will happen over and over again.',
         example:
-            'You are rejected in a job interview. You conclude you will never find work again',
+            'Just because you experience a bad outcome once doesn’t mean there will be bad outcomes every time you try something.',
     },
     MENTAL_FILTER: {
         name: 'Mental Filter',
         description:
-            'Taking one small negative event and dwelling on it. An opposite overgeneralization: instead of taking a small event and overgeneralizing, you focus on it exclusively and filter anything else out',
-        example: '',
+            "Taking one small negative event or detail in a situation and dwelling on it, filtering out anything positive like you're wearing a pair of (unhelpful) sunglasses.",
+        example:
+            'There are always positives and silver linings in situations. It can help to pay them special attention',
     },
     DISQUALIFY_THE_POSITIVE: {
         name: 'Disqualify The Positive',
         description:
-            'Disqualifying neutral or positive experiences, so they are transformed into negative ones',
-        example: '',
+            'Invalidating neutral or positive experiences so they are transformed into negative ones. For example, responding to a compliment with "they\'re just being nice".',
+        example: "Try to avoid throwing cold water on good things when they happen. Embrace them and their richness.",
     },
     MIND_READING: {
         name: 'Mind Reading',
         description:
-            'Invalidating neutral or positive experiences so they are transformed into negative ones',
-        example: '',
+            'Assuming arbitrarily that other people are looking down on you.',
+        example: 'People have a lot going on in their lives. Behaviors you perceive as an affront are likely unrelated to your actions or personality.',
     },
     FORTUNE_TELLING: {
         name: 'Fortune Telling',
-        description: 'Imagining something bad is about to happen',
+        description: 'Imagining arbitrarily that something bad is about to happen. Making negative predictions with no evidence behind them.',
         example: '',
     },
     MAGNIFICATION: {
@@ -88,7 +90,9 @@ const fillDistortionDetails = (distortionKey) => {
     const distortionDescriptionElement = document.querySelector(
         '.distortion-description'
     );
-    const distortionExampleElement = document.querySelector('.distortion-example');
+    const distortionExampleElement = document.querySelector(
+        '.distortion-example'
+    );
 
     distortionNameElement.innerHTML = name;
     distortionDescriptionElement.innerHTML = description;
@@ -105,7 +109,13 @@ const unhighlightDistortion = (distortionKey) => {
     distortion.style.color = 'black';
 };
 
-let currentDistortionKey;
+const setLeafSvg = () => {
+    const svgPlaceholder = document.querySelector('.leaf-image');
+    const randomNumber = Math.floor(Math.random() * 5);
+    svgPlaceholder.setAttribute('data', `plant-${randomNumber}.svg`);
+};
+
+let currentDistortionKey = getRandomDistortionKey();
 
 const fillDistortionList = () => {
     const distortionUlElement = document.querySelector('.distortion-list');
@@ -131,18 +141,11 @@ const fillDistortionList = () => {
     });
 };
 
-const setLeafSvg = () => {
-    const svgPlaceholder = document.querySelector('.leaf-image');
-    const randomNumber = Math.floor(Math.random() * 5);
-    svgPlaceholder.setAttribute('data', `plant-${randomNumber}.svg`);
-};
-
 window.onload = () => {
     fillDistortionList();
 
-    currentDistortionKey = getRandomDistortionKey();
-
     fillDistortionDetails(currentDistortionKey);
     highlightDistortion(currentDistortionKey);
+
     setLeafSvg();
 };

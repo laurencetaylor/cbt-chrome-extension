@@ -1,6 +1,6 @@
 {
-    "name": "UnDistort: CBT Mental Distortions",
-    "description": "Makes your new tab page highlight a cognitive behavioral therapy (CBT) mental distortion with explanation",
+    "name": "UnDistort - Highlight CBT mental distortions",
+    "description": "Customizes your new tab page to highlight a cognitive behavioral therapy (CBT) mental distortion.",
     "version": "1.0",
     "author": "Laurence Taylor",
     "manifest_version": 2,
