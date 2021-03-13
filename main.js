@@ -16,9 +16,9 @@ const distortionDetails = {
     MENTAL_FILTER: {
         name: 'Mental Filter',
         description:
-            "Taking one small negative event or detail in a situation and dwelling on it, filtering out anything positive like you're wearing a pair of (unhelpful) sunglasses.",
+            "Taking one small negative event or detail in a situation and dwelling on it, filtering out anything positive as if you're wearing a pair of (unhelpful) sunglasses.",
         example:
-            'There are always positives and silver linings in situations. It can help to pay them special attention',
+            'There are always positives and silver linings in situations. It can help to pay them special attention.',
     },
     DISQUALIFY_THE_POSITIVE: {
         name: 'Disqualify The Positive',
@@ -35,7 +35,7 @@ const distortionDetails = {
     FORTUNE_TELLING: {
         name: 'Fortune Telling',
         description: 'Imagining arbitrarily that something bad is about to happen. Making negative predictions with no evidence behind them.',
-        example: 'Try to catch yourself when you baselessly imagine bad things happening to you.',
+        example: 'Acknowledge the silliness of your predictions. Try to avoid baselessly imagining bad things happening.',
     },
     MAGNIFICATION: {
         name: 'Magnification',
@@ -52,25 +52,25 @@ const distortionDetails = {
     EMOTIONAL_REASONING: {
         name: 'Emotional Reasoning',
         description: 'Taking emotions as evidence for the truth. You feel like a failure, so you must be a failure.',
-        example: "Remember that negative emotions are not always rooted in reality., they are often the result of distorted perceptions.",
+        example: "Remember that negative emotions are not always rooted in reality, they are often the result of distorted perceptions.",
     },
     SHOULD_STATEMENTS: {
         name: 'Should Statements',
         description:
-            "Making yourself feel terrible by saying 'I should' or 'I must' do this or that.",
-        example: '',
+            "Making yourself feel terrible by saying 'I should' or 'I must' do this or that. Believing that other people 'should' behave in certain ways.",
+        example: "Try replacing 'should' with 'it would be nice if'. Alternatively, your 'should' might not even be accurate or rooted in reality.",
     },
     MISLABELLING: {
         name: 'Mislabelling',
         description:
-            'Describing events with words that are inaccurate and emotionally heavily loaded',
-        example: '',
+            'Describing events with words that are inaccurate and emotionally heavily loaded. For example, labelling yourself as a failure after one mistake.',
+        example: 'Remember the negative labels are overly-simplistic and wrong. Your entire complex self can never be associated with just one label.',
     },
     PERSONALIZATION: {
         name: 'Personalization',
         description:
-            'Assuming responsibility for negative events where there is no basis for doing so',
-        example: '',
+            'Arbitrarily assuming responsibility for negative events when there is no basis for doing so.',
+        example: 'Just because something bad happens does not mean it is your fault.',
     },
 };
 
