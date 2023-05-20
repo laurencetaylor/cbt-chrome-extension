@@ -85,6 +85,16 @@ const distortionDetails = {
     },
 };
 
+const renderRandomLeafSvg = () => {
+    const NUMBER_OF_SVGS = 5;
+
+    const svgPlaceholder = document.querySelector('.leaf-image');
+
+    const randomNumber = Math.floor(Math.random() * NUMBER_OF_SVGS);
+
+    svgPlaceholder.setAttribute('data', `plant-${randomNumber}.svg`);
+};
+
 const getRandomDistortionKey = () => {
     const distortionKeys = Object.keys(distortionDetails);
     const randomDistortionKey =
@@ -119,38 +129,32 @@ const unhighlightDistortionName = (distortionKey) => {
     distortion.style.color = 'black';
 };
 
-const renderRandomLeafSvg = () => {
-    const NUMBER_OF_SVGS = 5;
+const state = { currentDistortionKey: getRandomDistortionKey() };
 
-    const svgPlaceholder = document.querySelector('.leaf-image');
-
-    const randomNumber = Math.floor(Math.random() * NUMBER_OF_SVGS);
-
-    svgPlaceholder.setAttribute('data', `plant-${randomNumber}.svg`);
+const setCurrentDistortionKey = (newDistortionKey) => {
+    state.currentDistortionKey = newDistortionKey;
 };
 
-let currentDistortionKey;
-
 const changeSelectedDistortion = (newDistortionKey) => {
-    unhighlightDistortionName(currentDistortionKey);
+    unhighlightDistortionName(state.currentDistortionKey);
 
     renderDistortionDetails(newDistortionKey);
     highlightDistortionName(newDistortionKey);
 
-    currentDistortionKey = newDistortionKey;
+    setCurrentDistortionKey(newDistortionKey);
 };
 
 const renderDistortionListElement = (
     distortionKey,
-    distortionListContainer,
-    index
+    distortionListContainer
 ) => {
     const liElement = document.createElement('li');
 
-    liElement.setAttribute('class', distortionKey);
-    liElement.setAttribute('tabindex', index + 1);
-
     const distortionName = distortionDetails[distortionKey].name;
+
+    liElement.setAttribute('class', distortionKey);
+    liElement.setAttribute('tabindex', 0);
+    liElement.setAttribute('aria-label', `Select ${distortionName}`);
 
     liElement.innerHTML = distortionName;
 
@@ -170,22 +174,16 @@ const renderDistortionListElement = (
 const renderDistortionList = () => {
     const distortionListContainer = document.querySelector('.distortion-list');
 
-    Object.keys(distortionDetails).forEach((distortionKey, index) => {
-        renderDistortionListElement(
-            distortionKey,
-            distortionListContainer,
-            index
-        );
+    Object.keys(distortionDetails).forEach((distortionKey) => {
+        renderDistortionListElement(distortionKey, distortionListContainer);
     });
 };
 
 window.onload = () => {
     renderDistortionList();
 
-    currentDistortionKey = getRandomDistortionKey();
-
-    renderDistortionDetails(currentDistortionKey);
-    highlightDistortionName(currentDistortionKey);
+    renderDistortionDetails(state.currentDistortionKey);
+    highlightDistortionName(state.currentDistortionKey);
 
     renderRandomLeafSvg();
 };

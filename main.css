@@ -11,7 +11,7 @@ footer {
     text-align: right;
 }
 
-.header {
+header {
     margin: 2%;
 }
 
@@ -46,7 +46,7 @@ footer {
     background-color: white;
 }
 
-.distortion-library {
+nav {
     width: 50%;
 }
 
@@ -87,7 +87,7 @@ a:active {
 }
 
 @media only screen and (min-width: 801px) {
-    .distortion-library {
+    nav {
         padding: 10%;
     }
 
@@ -97,7 +97,7 @@ a:active {
 }
 
 @media only screen and (max-width: 800px) {
-    .distortion-library {
+    nav {
         padding: 2%;
     }
 
