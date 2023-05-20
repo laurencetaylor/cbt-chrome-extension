@@ -1,3 +1,4 @@
+// LIST OF MENTAL DISTORTIONS
 const distortionDetails = {
     ALL_OR_NOTHING: {
         name: 'All Or Nothing Thinking',
@@ -179,6 +180,7 @@ const renderDistortionList = () => {
     });
 };
 
+// ONLOAD
 window.onload = () => {
     renderDistortionList();
 
