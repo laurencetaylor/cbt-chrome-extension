@@ -30,37 +30,37 @@ const distortionDetails = {
     MIND_READING: {
         name: 'Mind Reading',
         description:
-            'Assuming arbitrarily that other people are looking down on you.',
+            'Assuming that other people are looking down on you without any reason.',
         example:
             'People have a lot going on in their lives. Behaviors you perceive as an affront are likely unrelated to your actions or personality.',
     },
     FORTUNE_TELLING: {
         name: 'Fortune Telling',
         description:
-            'Imagining arbitrarily that something bad is about to happen. Making negative predictions with no evidence behind them.',
+            'Imagining that something bad is about to happen and making negative predictions without any evidence.',
         example:
             'Acknowledge the silliness of your predictions. Try to avoid baselessly imagining bad things happening.',
     },
     MAGNIFICATION: {
         name: 'Magnification',
         description:
-            'Exaggerating your errors, fears, and imperfections; catastrophizing and blowing things out of proportion.',
+            'Exaggerating your errors, fears, and imperfections and blowing things out of proportion.',
         example:
             'Making a mistake does not mean your life will spiral out of control. Have empathy for yourself.',
     },
     MINIMIZATION: {
         name: 'Minimization',
         description:
-            'Minimizing your desirable qualities and strengths, as well as the flaws of others.',
+            'Minimizing your desirable qualities and strengths as well as the flaws of others.',
         example:
             'Be proud of your many good qualities. Accept that nobody is perfect.',
     },
     EMOTIONAL_REASONING: {
         name: 'Emotional Reasoning',
         description:
-            'Taking emotions as evidence for the truth. You feel like a failure, so you must be a failure.',
+            'Taking emotions as evidence for the truth. You feel like a failure, therefore you must be a failure.',
         example:
-            'Remember that negative emotions are not always rooted in reality, they are often the result of distorted perceptions.',
+            'Remember that negative emotions are not always based in reality, they are often the result of distorted perceptions.',
     },
     SHOULD_STATEMENTS: {
         name: 'Should Statements',
@@ -79,9 +79,9 @@ const distortionDetails = {
     PERSONALIZATION: {
         name: 'Personalization',
         description:
-            'Arbitrarily assuming responsibility for negative events when there is no basis for doing so.',
+            'Assuming responsibility for negative events when there is no basis for doing so.',
         example:
-            'Just because something bad happens does not mean it is your fault.',
+            'Just because something bad happens it does not mean that it is your fault.',
     },
 };
 
