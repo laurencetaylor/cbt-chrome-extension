@@ -94,13 +94,13 @@ const getRandomDistortionKey = () => {
     return randomDistortionKey;
 };
 
-const state = { _currentDistortionKey: getRandomDistortionKey() };
+const _state = { currentDistortionKey: getRandomDistortionKey() };
 
 const setCurrentDistortionKey = (newDistortionKey) => {
-    state._currentDistortionKey = newDistortionKey;
+    _state.currentDistortionKey = newDistortionKey;
 };
 
-const getCurrentDistortionKey = () => state._currentDistortionKey;
+const getCurrentDistortionKey = () => _state.currentDistortionKey;
 
 const renderRandomLeafSvg = () => {
     const NUMBER_OF_SVGS = 5;

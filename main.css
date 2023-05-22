@@ -46,10 +46,6 @@ footer {
     padding-left: 4em;
 }
 
-.distortion-name {
-    font-size: 2em;
-}
-
 .distortion-example {
     font-style: italic;
 }
@@ -58,7 +54,12 @@ footer {
     list-style-type: none;
 }
 
-.distortion-name, .distortion-description, .distortion-example, .distortion-list {
+.distortion-name {
+    font-size: 2em;
+    background-color: white;
+}
+
+.distortion-description, .distortion-example, .distortion-list {
     font-size: 1.2em;
     background-color: white;
 }
