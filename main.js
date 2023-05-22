@@ -94,13 +94,18 @@ const getRandomDistortionKey = () => {
     return randomDistortionKey;
 };
 
-const _state = { currentDistortionKey: getRandomDistortionKey() };
+const _state = {
+    currentDistortionKey: getRandomDistortionKey(),
+    isDarkMode: JSON.parse(window.localStorage.getItem('undistort-dark-mode')),
+};
 
 const setCurrentDistortionKey = (newDistortionKey) => {
     _state.currentDistortionKey = newDistortionKey;
 };
-
 const getCurrentDistortionKey = () => _state.currentDistortionKey;
+
+const setIsDarkMode = (isDarkMode) => (_state.isDarkMode = isDarkMode);
+const getIsDarkMode = () => _state.isDarkMode;
 
 const renderRandomLeafSvg = () => {
     const NUMBER_OF_SVGS = 5;
@@ -135,7 +140,7 @@ const highlightDistortionName = (distortionKey) => {
 
 const unhighlightDistortionName = (distortionKey) => {
     const distortion = document.querySelector(`.${distortionKey}`);
-    distortion.style.color = 'black';
+    distortion.style.color = getIsDarkMode() ? 'white' : 'black';
 };
 
 const changeSelectedDistortion = (newDistortionKey) => {
@@ -182,9 +187,38 @@ const renderDistortionList = () => {
     });
 };
 
+const renderDarkModeToggle = () => {
+    const darkModeToggle = document.querySelector('.dark-mode-toggle');
+
+    const darkModeText = 'Dark mode';
+    const lightModeText = 'Light mode';
+
+    darkModeToggle.innerHTML = getIsDarkMode() ? lightModeText : darkModeText;
+
+    darkModeToggle.addEventListener('click', () => {
+        setIsDarkMode(!getIsDarkMode());
+
+        document.body.classList.toggle('dark-mode');
+
+        darkModeToggle.innerHTML = getIsDarkMode()
+            ? lightModeText
+            : darkModeText;
+
+        window.localStorage.setItem(
+            'undistort-dark-mode',
+            document.body.classList.contains('dark-mode')
+        );
+    });
+};
+
 // ONLOAD
 window.onload = () => {
     renderDistortionList();
+    renderDarkModeToggle();
+
+    if (getIsDarkMode()) {
+        document.body.classList.add('dark-mode');
+    }
 
     const currentDistortionKey = getCurrentDistortionKey();
 

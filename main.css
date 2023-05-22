@@ -3,6 +3,11 @@ body {
     animation: fadeIn ease 1s;
 }
 
+body.dark-mode {
+    background-color: black;
+    color: white;
+}
+
 footer {
     position: fixed;
     left: 0;
@@ -16,7 +21,6 @@ footer {
 }
 
 .leaf-svg {
-    fill: black;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -56,12 +60,10 @@ footer {
 
 .distortion-name {
     font-size: 2em;
-    background-color: white;
 }
 
 .distortion-description, .distortion-example, .distortion-list {
     font-size: 1.2em;
-    background-color: white;
 }
 
 .distortion-list, .distortion-name {
@@ -72,7 +74,11 @@ footer {
     cursor: pointer;
 }
 
-a {
+.dark-mode-toggle {
+    cursor: pointer;
+}
+
+a, .dark-mode-toggle:hover {
     color: #cb9d06;
 }
 
