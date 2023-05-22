@@ -113,8 +113,12 @@ const renderRandomLeafSvg = () => {
     const svgPlaceholder = document.querySelector('.leaf-svg');
 
     const randomNumber = Math.floor(Math.random() * NUMBER_OF_SVGS);
+    const darkModeSuffix = getIsDarkMode() ? ':darkmode' : ':';
 
-    svgPlaceholder.setAttribute('data', `plant-${randomNumber}.svg`);
+    svgPlaceholder.setAttribute(
+        'data',
+        `./assets/plant-${randomNumber}${darkModeSuffix}.svg`
+    );
 };
 
 const renderDistortionDetails = (distortionKey) => {
@@ -160,6 +164,10 @@ const renderDistortionListElement = (
 
     const distortionName = distortionDetails[distortionKey].name;
 
+    if (distortionKey === getCurrentDistortionKey()) {
+        liElement.style.color = '#cb9d06';
+    }
+
     liElement.setAttribute('class', distortionKey);
     liElement.setAttribute('tabindex', 0);
     liElement.setAttribute('aria-label', `Select ${distortionName}`);
@@ -182,9 +190,36 @@ const renderDistortionListElement = (
 const renderDistortionList = () => {
     const distortionListContainer = document.querySelector('.distortion-list');
 
+    distortionListContainer.innerHTML = null;
+
     Object.keys(distortionDetails).forEach((distortionKey) => {
         renderDistortionListElement(distortionKey, distortionListContainer);
     });
+};
+
+const toggleDarkMode = (darkModeToggle, darkModeText, lightModeText) => {
+    const isDarkMode = getIsDarkMode();
+
+    setIsDarkMode(!isDarkMode);
+
+    document.body.classList.toggle('dark-mode');
+
+    darkModeToggle.innerHTML = isDarkMode ? darkModeText : lightModeText;
+
+    const leafSvg = document.querySelector('.leaf-svg');
+
+    const data = leafSvg.getAttribute('data');
+    const newData =
+        data.split(':')[0] + `${isDarkMode ? ':' : ':darkmode'}.svg`;
+
+    leafSvg.setAttribute('data', newData);
+
+    window.localStorage.setItem(
+        'undistort-dark-mode',
+        document.body.classList.contains('dark-mode')
+    );
+
+    renderDistortionList();
 };
 
 const renderDarkModeToggle = () => {
@@ -195,19 +230,14 @@ const renderDarkModeToggle = () => {
 
     darkModeToggle.innerHTML = getIsDarkMode() ? lightModeText : darkModeText;
 
-    darkModeToggle.addEventListener('click', () => {
-        setIsDarkMode(!getIsDarkMode());
+    darkModeToggle.addEventListener('click', () =>
+        toggleDarkMode(darkModeToggle, darkModeText, lightModeText)
+    );
 
-        document.body.classList.toggle('dark-mode');
-
-        darkModeToggle.innerHTML = getIsDarkMode()
-            ? lightModeText
-            : darkModeText;
-
-        window.localStorage.setItem(
-            'undistort-dark-mode',
-            document.body.classList.contains('dark-mode')
-        );
+    darkModeToggle.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            toggleDarkMode(darkModeToggle, darkModeText, lightModeText);
+        }
     });
 };
 
