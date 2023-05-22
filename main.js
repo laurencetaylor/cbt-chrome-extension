@@ -86,6 +86,8 @@ const distortionDetails = {
     },
 };
 
+const HIGHLIGHT_COLOR = '#cb9d06';
+
 const getRandomDistortionKey = () => {
     const distortionKeys = Object.keys(distortionDetails);
     const randomDistortionKey =
@@ -139,7 +141,7 @@ const renderDistortionDetails = (distortionKey) => {
 
 const highlightDistortionName = (distortionKey) => {
     const selectedDistortion = document.querySelector(`.${distortionKey}`);
-    selectedDistortion.style.color = '#cb9d06';
+    selectedDistortion.style.color = HIGHLIGHT_COLOR;
 };
 
 const unhighlightDistortionName = (distortionKey) => {
@@ -162,15 +164,16 @@ const renderDistortionListElement = (
 ) => {
     const liElement = document.createElement('li');
 
-    const distortionName = distortionDetails[distortionKey].name;
-
     if (distortionKey === getCurrentDistortionKey()) {
-        liElement.style.color = '#cb9d06';
+        liElement.style.color = HIGHLIGHT_COLOR;
     }
+
+    const distortionName = distortionDetails[distortionKey].name;
 
     liElement.setAttribute('class', distortionKey);
     liElement.setAttribute('tabindex', 0);
     liElement.setAttribute('aria-label', `Select ${distortionName}`);
+    liElement.setAttribute('role', 'button');
 
     liElement.innerHTML = distortionName;
 
@@ -198,26 +201,24 @@ const renderDistortionList = () => {
 };
 
 const toggleDarkMode = (darkModeToggle, darkModeText, lightModeText) => {
-    const isDarkMode = getIsDarkMode();
+    const newIsDarkMode = !getIsDarkMode();
 
-    setIsDarkMode(!isDarkMode);
+    setIsDarkMode(newIsDarkMode);
 
-    document.body.classList.toggle('dark-mode');
+    window.localStorage.setItem('undistort-dark-mode', newIsDarkMode);
 
-    darkModeToggle.innerHTML = isDarkMode ? darkModeText : lightModeText;
+    darkModeToggle.innerHTML = newIsDarkMode ? lightModeText : darkModeText;
 
     const leafSvg = document.querySelector('.leaf-svg');
-
     const data = leafSvg.getAttribute('data');
     const newData =
-        data.split(':')[0] + `${isDarkMode ? ':' : ':darkmode'}.svg`;
+        data.split(':')[0] + `${newIsDarkMode ? ':darkmode' : ':'}.svg`;
 
     leafSvg.setAttribute('data', newData);
 
-    window.localStorage.setItem(
-        'undistort-dark-mode',
-        document.body.classList.contains('dark-mode')
-    );
+    newIsDarkMode
+        ? document.body.classList.add('dark-mode')
+        : document.body.classList.remove('dark-mode');
 
     renderDistortionList();
 };
