@@ -89,7 +89,7 @@ const distortionDetails = {
 const renderRandomLeafSvg = () => {
     const NUMBER_OF_SVGS = 5;
 
-    const svgPlaceholder = document.querySelector('.leaf-image');
+    const svgPlaceholder = document.querySelector('.leaf-svg');
 
     const randomNumber = Math.floor(Math.random() * NUMBER_OF_SVGS);
 

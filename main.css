@@ -11,47 +11,71 @@ footer {
     text-align: right;
 }
 
-header {
-    margin: 2%;
+.title {
+    margin: 2em;
 }
 
-.leaf-image {
+.leaf-svg {
     fill: black;
     position: fixed;
     left: 0;
     bottom: 0;
-    margin: 2%;
+    margin: 2em;
     z-index: -1;
 }
 
 .footer-links {
     list-style-type: none;
-    margin: 2%;
+    margin: 2em;
 }
 
-.distortion-name {
-    font-weight: 700;
-    font-size: xx-large;
-    background-color: white;
+.content {
+    display: flex;
+    margin-top: 8em;
+    width: 100%;
 }
 
-.distortion-description {
-    font-size: large;
-    background-color: white;
-}
-
-.distortion-example {
-    font-size: large;
-    font-style: italic;
-    background-color: white;
-}
-
-nav {
+.distortion-nav {
     width: 50%;
+    display: flex;
+    justify-content: center;
 }
 
 .distortion-details {
     width: 50%;
+    padding-left: 4em;
+}
+
+.distortion-name {
+    font-size: 2em;
+}
+
+.distortion-example {
+    font-style: italic;
+}
+
+.distortion-list {
+    list-style-type: none;
+}
+
+.distortion-name, .distortion-description, .distortion-example {
+    background-color: white;
+}
+
+.distortion-description, .distortion-example, .distortion-list {
+    font-size: 1.2em;
+}
+
+.distortion-list, .distortion-name {
+    font-weight: 700;
+}
+
+.distortion-list li {
+    cursor: pointer;
+}
+
+a {
+    color: #cb9d06;
 }
 
 @keyframes fadeIn {
@@ -60,48 +84,5 @@ nav {
     }
     100% {
         opacity: 1;
-    }
-}
-
-.wrapper {
-    display: flex;
-    height: 50%;
-}
-
-.distortion-list {
-    list-style-type: none;
-    font-size: large;
-    font-weight: 700;
-}
-
-li {
-    cursor: pointer;
-}
-
-a {
-    color: #cb9d06;
-}
-
-a:active {
-    color: #cb9d06;
-}
-
-@media only screen and (min-width: 801px) {
-    nav {
-        padding: 10%;
-    }
-
-    .distortion-details {
-        padding: 10%;
-    }
-}
-
-@media only screen and (max-width: 800px) {
-    nav {
-        padding: 2%;
-    }
-
-    .distortion-details {
-        padding: 2%;
     }
 }
