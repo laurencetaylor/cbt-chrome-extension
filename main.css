@@ -58,12 +58,9 @@ footer {
     list-style-type: none;
 }
 
-.distortion-name, .distortion-description, .distortion-example {
-    background-color: white;
-}
-
-.distortion-description, .distortion-example, .distortion-list {
+.distortion-name, .distortion-description, .distortion-example, .distortion-list {
     font-size: 1.2em;
+    background-color: white;
 }
 
 .distortion-list, .distortion-name {
