@@ -86,6 +86,22 @@ const distortionDetails = {
     },
 };
 
+const getRandomDistortionKey = () => {
+    const distortionKeys = Object.keys(distortionDetails);
+    const randomDistortionKey =
+        distortionKeys[Math.floor(Math.random() * distortionKeys.length)];
+
+    return randomDistortionKey;
+};
+
+const state = { _currentDistortionKey: getRandomDistortionKey() };
+
+const setCurrentDistortionKey = (newDistortionKey) => {
+    state._currentDistortionKey = newDistortionKey;
+};
+
+const getCurrentDistortionKey = () => state._currentDistortionKey;
+
 const renderRandomLeafSvg = () => {
     const NUMBER_OF_SVGS = 5;
 
@@ -94,14 +110,6 @@ const renderRandomLeafSvg = () => {
     const randomNumber = Math.floor(Math.random() * NUMBER_OF_SVGS);
 
     svgPlaceholder.setAttribute('data', `plant-${randomNumber}.svg`);
-};
-
-const getRandomDistortionKey = () => {
-    const distortionKeys = Object.keys(distortionDetails);
-    const randomDistortionKey =
-        distortionKeys[Math.floor(Math.random() * distortionKeys.length)];
-
-    return randomDistortionKey;
 };
 
 const renderDistortionDetails = (distortionKey) => {
@@ -130,14 +138,8 @@ const unhighlightDistortionName = (distortionKey) => {
     distortion.style.color = 'black';
 };
 
-const state = { currentDistortionKey: getRandomDistortionKey() };
-
-const setCurrentDistortionKey = (newDistortionKey) => {
-    state.currentDistortionKey = newDistortionKey;
-};
-
 const changeSelectedDistortion = (newDistortionKey) => {
-    unhighlightDistortionName(state.currentDistortionKey);
+    unhighlightDistortionName(getCurrentDistortionKey());
 
     renderDistortionDetails(newDistortionKey);
     highlightDistortionName(newDistortionKey);
@@ -184,8 +186,10 @@ const renderDistortionList = () => {
 window.onload = () => {
     renderDistortionList();
 
-    renderDistortionDetails(state.currentDistortionKey);
-    highlightDistortionName(state.currentDistortionKey);
+    const currentDistortionKey = getCurrentDistortionKey();
+
+    renderDistortionDetails(currentDistortionKey);
+    highlightDistortionName(currentDistortionKey);
 
     renderRandomLeafSvg();
 };
