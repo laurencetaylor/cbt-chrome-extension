@@ -59,11 +59,11 @@ footer {
 }
 
 .distortion-name {
-    font-size: 2em;
+    font-size: xx-large;
 }
 
 .distortion-description, .distortion-example, .distortion-list {
-    font-size: 1.2em;
+    font-size: large;
 }
 
 .distortion-list, .distortion-name {
