@@ -1,5 +1,5 @@
-// LIST OF MENTAL DISTORTIONS
-const distortionDetails = {
+// CONSTANTS
+const DISTORTION_DETAILS = {
     ALL_OR_NOTHING: {
         name: 'All Or Nothing Thinking',
         description:
@@ -87,9 +87,26 @@ const distortionDetails = {
 };
 
 const HIGHLIGHT_COLOR = '#cb9d06';
+const DARK_MODE_TEXT_COLOR = 'white';
+const LIGHT_MODE_TEXT_COLOR = 'black';
+const DARK_MODE_TEXT = 'Dark mode';
+const LIGHT_MODE_TEXT = 'Light mode';
+const DARK_MODE_LOCAL_STORAGE = 'undistort-dark-mode';
+const DARK_SVG_SUFFIX = ':dark';
+const LIGHT_SVG_SUFFIX = ':light';
 
+// CLASS SELECTORS
+const DISTORTION_NAME_CLASS = '.distortion-name';
+const DISTORTION_DESCRIPTION_CLASS = '.distortion-description';
+const DISTORTION_EXAMPLE_CLASS = '.distortion-example';
+const DISTORTION_LIST_CLASS = '.distortion-list';
+const DARK_MODE_TOGGLE_CLASS = '.dark-mode-toggle';
+const LEAF_SVG_CLASS = '.leaf-svg';
+const DARK_MODE_CLASS_NAME = 'dark-mode';
+
+// STATE
 const getRandomDistortionKey = () => {
-    const distortionKeys = Object.keys(distortionDetails);
+    const distortionKeys = Object.keys(DISTORTION_DETAILS);
     const randomDistortionKey =
         distortionKeys[Math.floor(Math.random() * distortionKeys.length)];
 
@@ -98,7 +115,6 @@ const getRandomDistortionKey = () => {
 
 const _state = {
     currentDistortionKey: getRandomDistortionKey(),
-    isDarkMode: JSON.parse(window.localStorage.getItem('undistort-dark-mode')),
 };
 
 const setCurrentDistortionKey = (newDistortionKey) => {
@@ -106,47 +122,54 @@ const setCurrentDistortionKey = (newDistortionKey) => {
 };
 const getCurrentDistortionKey = () => _state.currentDistortionKey;
 
-const setIsDarkMode = (isDarkMode) => (_state.isDarkMode = isDarkMode);
-const getIsDarkMode = () => _state.isDarkMode;
+const setIsDarkMode = (isDarkMode) =>
+    window.localStorage.setItem(DARK_MODE_LOCAL_STORAGE, isDarkMode);
+const getIsDarkMode = () =>
+    JSON.parse(window.localStorage.getItem(DARK_MODE_LOCAL_STORAGE)) ?? false;
 
-const renderRandomLeafSvg = () => {
+// CONTROLLER
+const renderLeafSvg = () => {
     const NUMBER_OF_SVGS = 5;
 
-    const svgPlaceholder = document.querySelector('.leaf-svg');
+    const leafSvgElement = document.querySelector(LEAF_SVG_CLASS);
 
     const randomNumber = Math.floor(Math.random() * NUMBER_OF_SVGS);
-    const darkModeSuffix = getIsDarkMode() ? ':darkmode' : ':';
+    const darkModeSuffix = getIsDarkMode() ? DARK_SVG_SUFFIX : LIGHT_SVG_SUFFIX;
 
-    svgPlaceholder.setAttribute(
+    leafSvgElement.setAttribute(
         'data',
         `./assets/plant-${randomNumber}${darkModeSuffix}.svg`
     );
 };
 
 const renderDistortionDetails = (distortionKey) => {
-    const { name, description, example } = distortionDetails[distortionKey];
+    const { name, description, example } = DISTORTION_DETAILS[distortionKey];
 
-    const distortionNameElement = document.querySelector('.distortion-name');
-    const distortionDescriptionElement = document.querySelector(
-        '.distortion-description'
-    );
-    const distortionExampleElement = document.querySelector(
-        '.distortion-example'
-    );
+    const classNameToContentMap = {
+        [DISTORTION_NAME_CLASS]: name,
+        [DISTORTION_DESCRIPTION_CLASS]: description,
+        [DISTORTION_EXAMPLE_CLASS]: example,
+    };
 
-    distortionNameElement.innerHTML = name;
-    distortionDescriptionElement.innerHTML = description;
-    distortionExampleElement.innerHTML = example;
+    Object.entries(classNameToContentMap).forEach(([className, content]) => {
+        const element = document.querySelector(className);
+
+        element.innerHTML = content;
+    });
 };
 
 const highlightDistortionName = (distortionKey) => {
-    const selectedDistortion = document.querySelector(`.${distortionKey}`);
-    selectedDistortion.style.color = HIGHLIGHT_COLOR;
+    const distortionElement = document.querySelector(`.${distortionKey}`);
+
+    distortionElement.style.color = HIGHLIGHT_COLOR;
 };
 
 const unhighlightDistortionName = (distortionKey) => {
-    const distortion = document.querySelector(`.${distortionKey}`);
-    distortion.style.color = getIsDarkMode() ? 'white' : 'black';
+    const distortionElement = document.querySelector(`.${distortionKey}`);
+
+    distortionElement.style.color = getIsDarkMode()
+        ? DARK_MODE_TEXT_COLOR
+        : LIGHT_MODE_TEXT_COLOR;
 };
 
 const changeSelectedDistortion = (newDistortionKey) => {
@@ -158,103 +181,103 @@ const changeSelectedDistortion = (newDistortionKey) => {
     setCurrentDistortionKey(newDistortionKey);
 };
 
-const renderDistortionListElement = (
-    distortionKey,
-    distortionListContainer
-) => {
-    const liElement = document.createElement('li');
+const renderDistortionListItem = (distortionKey, distortionListContainer) => {
+    const listItemElement = document.createElement('li');
 
     if (distortionKey === getCurrentDistortionKey()) {
-        liElement.style.color = HIGHLIGHT_COLOR;
+        listItemElement.style.color = HIGHLIGHT_COLOR;
     }
 
-    const distortionName = distortionDetails[distortionKey].name;
+    const distortionName = DISTORTION_DETAILS[distortionKey].name;
 
-    liElement.setAttribute('class', distortionKey);
-    liElement.setAttribute('tabindex', 0);
-    liElement.setAttribute('aria-label', `Select ${distortionName}`);
-    liElement.setAttribute('role', 'button');
+    const attributeToValueMap = {
+        class: distortionKey,
+        tabindex: 0,
+        'aria-label': `Select ${distortionName}`,
+        role: 'button',
+    };
 
-    liElement.innerHTML = distortionName;
+    Object.entries(attributeToValueMap).forEach(([attribute, value]) =>
+        listItemElement.setAttribute(attribute, value)
+    );
 
-    liElement.addEventListener('click', (event) => {
+    listItemElement.innerHTML = distortionName;
+
+    listItemElement.addEventListener('click', (event) => {
         changeSelectedDistortion(event.target.className);
     });
 
-    liElement.addEventListener('keydown', (event) => {
+    listItemElement.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             changeSelectedDistortion(event.target.className);
         }
     });
 
-    distortionListContainer.appendChild(liElement);
+    distortionListContainer.appendChild(listItemElement);
 };
 
 const renderDistortionList = () => {
-    const distortionListContainer = document.querySelector('.distortion-list');
+    const distortionListElement = document.querySelector(DISTORTION_LIST_CLASS);
 
-    distortionListContainer.innerHTML = null;
+    distortionListElement.innerHTML = null;
 
-    Object.keys(distortionDetails).forEach((distortionKey) => {
-        renderDistortionListElement(distortionKey, distortionListContainer);
+    Object.keys(DISTORTION_DETAILS).forEach((distortionKey) => {
+        renderDistortionListItem(distortionKey, distortionListElement);
     });
 };
 
-const toggleDarkMode = (darkModeToggle, darkModeText, lightModeText) => {
+const toggleDarkMode = (darkModeToggle) => {
     const newIsDarkMode = !getIsDarkMode();
 
-    setIsDarkMode(newIsDarkMode);
+    darkModeToggle.innerHTML = newIsDarkMode ? LIGHT_MODE_TEXT : DARK_MODE_TEXT;
 
-    window.localStorage.setItem('undistort-dark-mode', newIsDarkMode);
+    const leafSvgElement = document.querySelector(LEAF_SVG_CLASS);
 
-    darkModeToggle.innerHTML = newIsDarkMode ? lightModeText : darkModeText;
-
-    const leafSvg = document.querySelector('.leaf-svg');
-    const data = leafSvg.getAttribute('data');
+    const data = leafSvgElement.getAttribute('data');
     const newData =
-        data.split(':')[0] + `${newIsDarkMode ? ':darkmode' : ':'}.svg`;
+        data.split(':')[0] +
+        `${newIsDarkMode ? DARK_SVG_SUFFIX : LIGHT_SVG_SUFFIX}.svg`;
 
-    leafSvg.setAttribute('data', newData);
+    leafSvgElement.setAttribute('data', newData);
 
     newIsDarkMode
-        ? document.body.classList.add('dark-mode')
-        : document.body.classList.remove('dark-mode');
+        ? document.body.classList.add(DARK_MODE_CLASS_NAME)
+        : document.body.classList.remove(DARK_MODE_CLASS_NAME);
 
+    setIsDarkMode(newIsDarkMode);
     renderDistortionList();
 };
 
 const renderDarkModeToggle = () => {
-    const darkModeToggle = document.querySelector('.dark-mode-toggle');
-
-    const darkModeText = 'Dark mode';
-    const lightModeText = 'Light mode';
-
-    darkModeToggle.innerHTML = getIsDarkMode() ? lightModeText : darkModeText;
-
-    darkModeToggle.addEventListener('click', () =>
-        toggleDarkMode(darkModeToggle, darkModeText, lightModeText)
+    const darkModeToggleElement = document.querySelector(
+        DARK_MODE_TOGGLE_CLASS
     );
 
-    darkModeToggle.addEventListener('keydown', (event) => {
+    darkModeToggleElement.innerHTML = getIsDarkMode()
+        ? LIGHT_MODE_TEXT
+        : DARK_MODE_TEXT;
+
+    darkModeToggleElement.addEventListener('click', () =>
+        toggleDarkMode(darkModeToggleElement)
+    );
+
+    darkModeToggleElement.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
-            toggleDarkMode(darkModeToggle, darkModeText, lightModeText);
+            toggleDarkMode(darkModeToggleElement);
         }
     });
 };
 
 // ONLOAD
-window.onload = () => {
-    renderDistortionList();
-    renderDarkModeToggle();
-
+const renderTab = () => {
     if (getIsDarkMode()) {
-        document.body.classList.add('dark-mode');
+        document.body.classList.add(DARK_MODE_CLASS_NAME);
     }
 
-    const currentDistortionKey = getCurrentDistortionKey();
-
-    renderDistortionDetails(currentDistortionKey);
-    highlightDistortionName(currentDistortionKey);
-
-    renderRandomLeafSvg();
+    renderDistortionList();
+    renderDistortionDetails(getCurrentDistortionKey());
+    renderDarkModeToggle();
+    renderLeafSvg();
 };
+
+window.onload = renderTab;
