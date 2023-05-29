@@ -17,7 +17,7 @@ footer {
 }
 
 .title {
-    font-size: medium;
+    font-size: 1rem;
     margin: 2%;
 }
 
@@ -31,7 +31,7 @@ footer {
 
 .footer-links {
     list-style-type: none;
-    font-size: small;
+    font-size: 0.75rem;
     margin: 2%;
 }
 
@@ -61,11 +61,11 @@ footer {
 }
 
 .distortion-name {
-    font-size: xx-large;
+    font-size: 2rem;
 }
 
 .distortion-description, .distortion-example, .distortion-list {
-    font-size: large;
+    font-size: 1.125rem;
 }
 
 .distortion-list, .distortion-name {
